@@ -15,5 +15,7 @@ The app is meant for:
 ## Environment Variables
 Create a local environment file named `.env` at the root of your project with the following keys:
 
+```text
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
+```
