@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 import MyRequestsDashboard from './pages/StudentDashboard';
-import SearchCourse from './pages/SearchCourse';
+import SearchCourse from './pages/CoursePage';
 import CoordinatorDashboard from './pages/CoordinatorDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 

@@ -9,6 +9,7 @@ export default function AuthPage() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [studentId, setStudentId] = useState('');
+  const [program, setProgram] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,6 +31,7 @@ export default function AuthPage() {
       if (!firstName) missing.push('firstName');
       if (!lastName) missing.push('lastName');
       if (!studentId) missing.push('studentId');
+      if (!program) missing.push('program');
       if (!confirmPassword) missing.push('confirmPassword');
     }
 
@@ -97,6 +99,7 @@ export default function AuthPage() {
               first_name: firstName,
               last_name: lastName,
               student_id: studentId,
+              program: program,
               full_name: `${firstName} ${lastName}`
             }
           }
@@ -117,6 +120,7 @@ export default function AuthPage() {
         setFirstName('');
         setLastName('');
         setStudentId('');
+        setProgram('');
         setEmail('');
         setPassword('');
         setConfirmPassword('');
@@ -166,13 +170,25 @@ export default function AuthPage() {
                   className={getInputClass('lastName')}
                 />
               </div>
-              <input 
-                type="text" 
-                placeholder="Student ID number" 
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
-                className={getInputClass('studentId')}
-              />
+              <div className="flex gap-4">
+                <input 
+                  type="text" 
+                  placeholder="Student ID number" 
+                  value={studentId}
+                  onChange={(e) => setStudentId(e.target.value)}
+                  className={getInputClass('studentId')}
+                />
+                <select
+                  value={program}
+                  onChange={(e) => setProgram(e.target.value)}
+                  className={getInputClass('program')}
+                >
+                  <option value="" disabled>Select Program</option>
+                  <option value="BSCS">BSCS</option>
+                  <option value="BSIT">BSIT</option>
+                  <option value="BSIS">BSIS</option>
+                </select>
+              </div>
             </>
           )}
           
