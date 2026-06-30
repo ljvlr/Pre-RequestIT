@@ -1,16 +1,21 @@
-# React + Vite
+# Pre-RequestIT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pre-RequestIT is a React + Vite web application for a Course Request System in the USC DCISM. 
+The app models a university course expansion and off-semester petition workflow. It allows students to browse the master curriculum and securely join or initiate course petitions, while providing academic coordinators with real-time demand dashboards.
 
-Currently, two official plugins are available:
+## What This App Is For
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Pre-RequestIT is built around a structured academic demand model. It is not an official enrollment system, a grading platform, or a general student information system.
 
-## React Compiler
+The app is meant for:
+* University students who need to formally request off-semester subjects or expansion classes.
+* Academic coordinators who need a centralized, data-driven dashboard sorted by student demand to make rapid approval decisions.
+* System admins managing the master curriculum and assigning secure user roles.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Environment Variables
+Create a local environment file named `.env` at the root of your project with the following keys:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+```
