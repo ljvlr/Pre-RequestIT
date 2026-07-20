@@ -51,7 +51,7 @@ export default function CoordinatorModal({ selectedCourse, requestDetails, activ
           <p className="text-sm text-gray-500 italic mb-6">Decision controls for Off-Semester Petitions will be available in Sprint 3.</p>
         )}
 
-        <button onClick={onClose} className="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition-colors">Close View</button>
+        <button onClick={onClose} className="w-full py-3 bg-red-400 hover:bg-red-500 text-gray-800 font-semibold rounded-xl transition-colors">Close View</button>
       </div>
     </div>
   );
