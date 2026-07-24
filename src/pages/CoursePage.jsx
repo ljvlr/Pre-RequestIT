@@ -16,8 +16,7 @@ export default function SearchCourse() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [preferredSchedule, setPreferredSchedule] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const ACTIVE_SEMESTER = '2nd';
+  const [activeSemester, setActiveSemester] = useState('2nd'); 
 
   useEffect(() => {
     fetchData();
@@ -31,6 +30,9 @@ export default function SearchCourse() {
         return;
       }
 
+      const { data: settings } = await supabase.from('system_settings').select('active_semester').eq('id', 1).single();
+      if (settings) setActiveSemester(settings.active_semester);
+
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
@@ -43,11 +45,24 @@ export default function SearchCourse() {
       const { data: coursesData, error: coursesError } = await supabase
         .from('courses')
         .select('*')
-        .ilike('program', `%${profileData.program}%`)
+        .ilike('program', `%${profileData.program}%`) 
         .order('requests', { ascending: false });
 
       if (coursesError) throw coursesError;
-      setCourses(coursesData);
+
+      const { data: allRequests } = await supabase.from('requests').select('course_id, status, remarks');
+
+      const processedCourses = coursesData.map(course => {
+        const courseRequests = allRequests?.filter(r => r.course_id === course.id) || [];
+        const decided = courseRequests.find(r => r.status && r.status !== 'Pending');
+        return {
+          ...course,
+          overall_status: decided ? decided.status : 'Pending',
+          overall_remarks: decided ? decided.remarks : null
+        };
+      });
+
+      setCourses(processedCourses);
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -81,7 +96,9 @@ export default function SearchCourse() {
           {
             profile_id: profile.id,
             course_id: selectedCourse.id,
-            preferred_schedule: preferredSchedule
+            preferred_schedule: preferredSchedule,
+            status: selectedCourse.overall_status || 'Pending',
+            remarks: selectedCourse.overall_remarks || null
           }
         ]);
 
@@ -92,11 +109,10 @@ export default function SearchCourse() {
           throw error;
         }
       } else {
-        alert('Successfully joined the petition.');
         navigate('/dashboard');
       }
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     } finally {
       setIsSubmitting(false);
       setSelectedCourse(null);
@@ -108,8 +124,8 @@ export default function SearchCourse() {
     course.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const expansionRequests = filteredCourses.filter(c => c.semester === ACTIVE_SEMESTER);
-  const offSemesterPetitions = filteredCourses.filter(c => c.semester !== ACTIVE_SEMESTER);
+  const expansionRequests = filteredCourses.filter(c => c.semester === activeSemester);
+  const offSemesterPetitions = filteredCourses.filter(c => c.semester !== activeSemester);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-500">Loading courses...</div>;
 
