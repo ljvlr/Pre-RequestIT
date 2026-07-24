@@ -131,7 +131,7 @@ export default function AddEditCourse() {
                 title="Pre-RequestIT (Admin)"
                 navItems={[{ label: 'Users', onClick: () => {navigate('/admin');}, isActive: false },
                 { label: 'Courses', onClick: () => {navigate('/admin/courses');}, isActive: true },
-                { label: 'Expansion/Petitions', onClick: () => {}, isActive: false }
+                { label: 'Expansion/Petitions', onClick: () => {navigate('/admin/requests');}, isActive: false }
                 ]}
                 onLogoutClick={() => setShowLogoutPrompt(true)}
             />

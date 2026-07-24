@@ -42,7 +42,7 @@ export default function AdminCourses() {
                 title="Pre-RequestIT (Admin)"
                 navItems={[{ label: 'Users', onClick: () => {navigate('/admin');}, isActive: false },
                 { label: 'Courses', onClick: () => {}, isActive: true },
-                { label: 'Expansion/Petitions', onClick: () => {}, isActive: false }
+                { label: 'Expansion/Petitions', onClick: () => {navigate('/admin/requests');}, isActive: false }
                 ]}
                 onLogoutClick={() => setShowLogoutPrompt(true)}
             />

@@ -80,7 +80,7 @@ export default function AdminDashboard() {
           title="Pre-RequestIT (Admin)"
           navItems={[{ label: 'Users', onClick: () => {}, isActive: true },
             { label: 'Courses', onClick: () => {navigate('/admin/courses');}, isActive: false },
-            { label: 'Expansion/Petitions', onClick: () => {}, isActive: false }
+            { label: 'Expansion/Petitions', onClick: () => {navigate('/admin/requests');}, isActive: false }
           ]}
           onLogoutClick={() => setShowLogoutPrompt(true)}
         />
